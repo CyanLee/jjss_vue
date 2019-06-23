@@ -231,4 +231,223 @@ $(document).ready(function () {
         5.NaN
         6.''(空字符串)
     */
+
+    /* 5.8.1 短路求值 */
+    //x && y 如果两个值为true则选择最右边(y),其他的都是选择false(优先选择最左边的false)
+    //x || y 如果两个值都是false,则选择最右边的(y),其他的选择true(优先选择最左的true)
+
+    // let options
+    // if (!options) options = {};
+    // options = options || {};
+
+    /* 5.8.4 逗号运算符 */
+    // let x = 0, y = 10, z;
+    // z = (x++, y++);
+    // console.log(z); //10
+
+    /* 5.9.2 类型判断表达式 */
+    // typeof undefined = "undefined"
+    // typeof null = "object"
+    // typeof {} = "object"
+    // typeof true = "boolean"
+    // typeof 1 = "number"
+    // typeof "" = string
+    // typeof Symbol() = "symbol"
+    // typeof function(){} = "function"
+
+
+    /* 5.10 解构赋值 */
+    //这个就是单独创建属性给他们批量赋值
+    // const obj = {b:2,c:3,d:4};
+    // let a,b,c;
+    //{a,b,c} = obj;
+    // ({a,b,c} = obj);
+
+    //数组
+    // const arr = [1,2,3];
+    //数组解构赋值
+    // let [x,y] = arr;
+    // x //1
+    // y //2
+
+    // const arr = [1,2,3,4,,5];
+    // let [x,y,...rest] = arr;
+    // x = 1
+    // y = 2
+    // rest = [3,4,5];
+
+    // let a = 5, b = 10;
+    // [a,b] = [b,a];
+    // a = 10
+    // b = 5
+
+
+    /* 6.3.2 解构参数 */
+    // function getSentence({subject,verb,object}) {
+
+    // }
+    // const o = {
+    //     subject = "1",
+    //     verb = "2",
+    //     object = "3",
+    // }
+    // getSentence(o)
+
+    //展开操作符
+    // function addPrefix(prefix,...words) {
+    //     const prefixedWords = [];
+    //     for(let i = 0;i < words.length;i++) {
+
+    //     }
+    // }
+    // addPrefix(1,2,3,4,5,5,6);
+
+    //默认值,这个和swift,那个初始化默认值一样,不传就当默认
+    // function f(a,b = "default",c = 3) {
+
+    // }
+    // f(5,6,7)    //5-6-7
+    // f(5,6)      //5-6-3
+    // f(5)        //5-default-3
+    // f()         //undefined-default-3
+
+    /* 6.4 函数作为对象属性 */
+    // const o = {
+    //     name:'Wallace',
+    //     bark: function() {return 'Woof!';},
+    // }
+    //同等
+    // const o = {
+    //     name:'Wallace',
+    //     bark() {return 'Woof!';},
+    // }
+
+
+    /* 匿名函数 一般作为参数时使用的,或者贪快 */
+    // const f = function() {
+
+    // };
+
+    /* 6.7 箭头符号 */
+    //=> 可以省略function 和 return
+    // const f1 = function() {return "hello";}
+    // const f1 = () => "hello";
+    // const f3 = function(a,b) {return "hello";}
+    // const f3 = (a,b) => a+b;
+
+    /* 6.8 调用.请求和绑定 */
+    // const bruce = {name:"Bruce"};
+    // const madeline = {name:"Madeline"};
+    // function greet() {
+    //     return 'Hello,Im'+this.name;
+    // }
+    // greet();
+    // greet.call(bruce);
+    // greet.call(madeline);
+
+    // function update(birthYear,occupation) {
+    //     this.birthYear = birthYear;
+    //     this.occupation = occupation;
+    // }
+    //我的理解 update.call(a,b,c)   a=是call的参数(this) b=是update的第一个参数, c=是update的第二个参数
+    // update.call(bruce,1949,'singer');
+    //所以bruce会多了2个参数,分别为birthYear和occupation
+    //打印结果{name:'Bruce',birthYear:'1949',occupation:'singer'}
+    // console.log(bruce);
+
+    //call会像一般的函数一样直接获取参数
+    //apply则以数组的方法获取参数
+    //bind方法可以给一个函数永久地绑定this值
+
+    // update.apply(bruce,[1955,'actor']);
+    //打印结果{name:'Bruce',birthYear:'1955',occupation:'actor'}
+
+    //获取数组中最大值和最小值
+    const arr = [2, 3, -5, 15, 7];
+    // const max = Math.max.apply(null,arr);
+    // const min = Math.min.apply(null,arr);
+    // const newBruce = [1948,'martial','artist'];
+
+    //可以使用展开运算符(...)实现
+    // update.call(bruce,...newBruce);
+    // Math.max(...arr);
+    // Math.min(...arr);
+
+    // const updateBruce = update.bind(bruce);
+    // updateBruce(1965,'actor');  //{name:'Bruce',birthYear:'1965',occupation:'actor'}
+    // updateBruce.call(madeline,1234,'king'); //{name:'Bruce',birthYear:'1234',occupation:'king'}
+    //name却没有改变,因为用了bind
+
+    // const updateBruce1949 = update.bind(bruce,1949);
+    // updateBruce1949('singer,songwriter');
+    //bruce现在的值是{name:Bruce,birthYear:1949,occupation:singer,songwriter};
+    //这里有个不懂得,为啥name没有变,如果我要改变其他参数呢?
+
+    //call会像一般的函数一样直接获取参数
+    //apply则以数组的方法获取参数
+    //bind方法可以给一个函数永久地绑定this值
+
+    /* 作用域 */
+    // let f;
+    // {
+    //    let o = {note:'safe'};
+    //    f = function() {
+    //        return o;
+    //    } 
+    // }
+    // let oRef = f();
+    // oRef.note = 'Not so safe after all!';
+
+    /* 7.7 即使调用函数表达式 */
+    //这种写法是会自动调用的
+    // (function(){
+
+    // })();
+
+    //突然不知道这种写法的用处
+    // const message = (function() {
+    //     const secret = "I'm a secret!";
+    //     console.log(1); //最开始调用
+    //     return 'The secret is' + secret.length + 'characters long';
+    // })();
+    // console.log(2); //最后调用
+
+    //这种x是全局变量(js默认以var进行声明)
+    // if (x !== 3) {
+    //     console.log(y);
+    //     var y = 5;
+    //     if (y === 5) {
+    //         var x = 3;
+    //     }
+    //     console.log(y);
+    // }
+    // if (x === 3) {
+    //     console.log(y);
+    // }
+
+    /* 7.9 函数提升 */
+    //这里有个问题,如果使用默认的创建函数,则没有位置的限制
+    f();
+    function f() {
+        console.log('f');
+    }
+    //如果函数被赋值,则有没位置的限制(申明方法必须在调用者的前面)
+    f();
+    let f = function() {
+        console.log('f');
+    }
+
+    /*  闭包的初理解
+        闭包的作用,创建一个不是全局变量的全局变量
+        简单说就是不是随便可以修改的全部变量
+        其中一个特点,retrue一个函数
+    */
+
+    /* 8.2.1 在起始和末尾添加或删除元素 */
+    const arr = ["b","c","c"];
+    arr.push("e");  //添加元素到最后一位
+    arr.pop();      //删除最后一位元素
+    arr.unshift("a");   //添加元素到第一位
+    arr.shift();    //删除第一位元素
+
 });
