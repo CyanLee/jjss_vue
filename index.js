@@ -363,7 +363,7 @@ $(document).ready(function () {
     //打印结果{name:'Bruce',birthYear:'1955',occupation:'actor'}
 
     //获取数组中最大值和最小值
-    const arr = [2, 3, -5, 15, 7];
+    // const arr = [2, 3, -5, 15, 7];
     // const max = Math.max.apply(null,arr);
     // const min = Math.min.apply(null,arr);
     // const newBruce = [1948,'martial','artist'];
@@ -481,6 +481,45 @@ $(document).ready(function () {
     // arr.copyWithin(2,0,2);      //arr现在是[1,3,1,3];
     // arr.copyWithin(0,-3,-1);    //arr现在是[3,1,1,3];
 
+    /* 8.2.6 用指定值填充数组 */
+    //将一个固定值赋给数组中任意位置元素(修改当前数组),这个方法跟数组构造器(可以指定数组的初始大小)
+    //可以任意指定一个起始位置和结束位置,然后填充这部分的数组值(下标还可以为负值)
+    // const arr = new Array(5).fill(1);   //arr初始化为(1,1,1,1,1)
+    // arr.fill("a");      //arr现在是["a","a","a","a","a"]
+    // arr.fill("b",1);    //arr现在是["a","b","b","b","b"]
+    // arr.fill("c",2,4);  //arr现在是["a","b","c","c","b"]
+    // arr.fill(5.5,-4);   //arr现在是["a",5.5,5.5,5.5,5.5]
+    // arr.fill(0,-3,-1);  //arr现在是["a",5.5,0,0,5.5]
 
+    /* 8.2.7 数组反转和排序 */
+    // const arr = [1,2,3,4,5];
+    // arr.reverse();  //arr is now [5,4,3,2,1]
+    // const arr = [5,3,2,4,1];
+    // arr.sort();     //arr is now [1,2,3,4,5]
+    // const arr = [{name:"Suzanne"},{name:"Jim"},{name:"Trevor"},{name:"Amanda"}];
+    // arr.sort(); //arr没有变化
+    // arr.sort((a,b) => a.name > b.name); //arr按照元素name属性的字母顺序排序
+    // arr.sort((a,b) => a.name[1] < b.name[1]);   //arr按照元素name属性的第二个字母的字母顺序就行排序
+
+    /* 8.3 数组搜索 */
+    //返回-1,则表示没有匹配到元素
+    //indexOf重开头找   lastIndexOf重结尾找
+    const o = {name:"Jerry"};
+    const arr = [1,5,"a",o,true,5,[1,2],"9"];
+    arr.indexOf(5);                 //returns 1
+    arr.lastIndexOf(5)              //returns 5
+    arr.indexOf("a");               //returns 2
+    arr.lastIndexOf("a")            //returns 2
+    arr.indexOf({name:"Jerry"});    //returns -1
+    arr.indexOf(o);                 //returns 3
+    arr.indexOf([1,2]);             //returns -1
+    console.log(arr.indexOf([1,2]));
+    arr.indexOf("9");               //returns 7
+    arr.indexOf(9);                 //returns -1
+
+    arr.indexOf("a",5);             //returns -1
+    arr.indexOf(5,5);               //returns 5
+    arr.lastIndexOf(5,4);           //returns 1
+    arr.lastIndexOf(true,3);        //returns -1                
 
 });
