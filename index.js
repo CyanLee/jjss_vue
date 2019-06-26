@@ -504,22 +504,224 @@ $(document).ready(function () {
     /* 8.3 数组搜索 */
     //返回-1,则表示没有匹配到元素
     //indexOf重开头找   lastIndexOf重结尾找
-    const o = {name:"Jerry"};
-    const arr = [1,5,"a",o,true,5,[1,2],"9"];
-    arr.indexOf(5);                 //returns 1
-    arr.lastIndexOf(5)              //returns 5
-    arr.indexOf("a");               //returns 2
-    arr.lastIndexOf("a")            //returns 2
-    arr.indexOf({name:"Jerry"});    //returns -1
-    arr.indexOf(o);                 //returns 3
-    arr.indexOf([1,2]);             //returns -1
-    console.log(arr.indexOf([1,2]));
-    arr.indexOf("9");               //returns 7
-    arr.indexOf(9);                 //returns -1
+    //不知为啥,数组没有找到
+    // const o = {name:"Jerry"};
+    // const arr = [1,5,"a",o,true,5,[1,2],"9"];
+    // arr.indexOf(5);                 //returns 1
+    // arr.lastIndexOf(5)              //returns 5
+    // arr.indexOf("a");               //returns 2
+    // arr.lastIndexOf("a")            //returns 2
+    // arr.indexOf({name:"Jerry"});    //returns -1
+    // arr.indexOf(o);                 //returns 3
+    // arr.indexOf([1,2]);             //returns -1
+    // console.log(arr.indexOf([1,2]));
+    // arr.indexOf("9");               //returns 7
+    // arr.indexOf(9);                 //returns -1
 
-    arr.indexOf("a",5);             //returns -1
-    arr.indexOf(5,5);               //returns 5
-    arr.lastIndexOf(5,4);           //returns 1
-    arr.lastIndexOf(true,3);        //returns -1                
+    // arr.indexOf("a",5);             //returns -1
+    // arr.indexOf(5,5);               //returns 5
+    // arr.lastIndexOf(5,4);           //returns 1
+    // arr.lastIndexOf(true,3);        //returns -1    
+
+    // findIndex 可以选择数组里的元素,加有条件 返回数组中的下标
+    // const arr = [{id:5,name:"Judith"},{id:7,name:"Francis"}];
+    // arr.findIndex(a => a.id === 5);             return 0
+    // arr.findIndex(a => a.name === "Francis");   return 1
+    // arr.findIndex(a => a === 3);                return -1
+    // arr.findIndex(a => a.name === 17);          return -1
+
+    // find 如果查询得到则返回该特定元素
+    // const arr = [{id:5,name:"Judith"},{id:7,name:"Francis"}];
+    // arr.find(o => o.id === 5);  return Object {id:5,name:"judith"}
+    // arr.find(o => o.id === 2);  return null
+
+    //寻找以指定下标开始的元素的平方数
+    // const arr = [1,17,16,5,4,16,10,3,49];
+    // arr.find((x,i) => i > 2 && Number.isInteger(Math.sqrt(x))); return 4
+
+    //find和findIndex还允许在方法调用过程中指定this变量使用的值,他么么可以用在需要调用某个对象方法的场景中
+    // class Person {
+    //     constructor(name) {
+    //         this.name = name;
+    //         this.id = Person.nextId++;
+    //     }
+    // }
+    // Person.nextId = 0;
+    // const jamie = new Person("Jamie");
+    //     juliet = new Person("Juliet");
+    //     peter = new Person("Peter");
+    //     jay = new Person("jay");
+    // const arr = [jamie,juliet,peter,jay];
+    // //选择1:直接比较ID:
+    // arr.find(p => p.id === juliet.id)   //返回juliet对象
+    // //选择2:使用this参数
+    // arr.find(p => p.id === this.id, juliet);    //返回juliet对象
+
+    // 一旦找到符合条件的元素(只需要一个符合条件的元素,所以在找到第一个元素后会停止查找)
+    // some方法就会返回true,否则返回false
+    // const arr = [5,7,12,15,17];
+    // arr.some(x => x%2 === 0);   //true; 12是偶数
+    // arr.some(x => Number.isInteger(Math.sqrt(x)));  //false没有平方数
+
+    //而当数组中的每个元素都符合条件的时候,every方法才会返回true,否则返回false,当every方法发现一个不符合条件的元素时,就会停止查找并返回false,否则,会扫描整个数组
+    // const arr = [4,6,16,36];
+    // arr.every(x => x%2 === 0);  //true 没有奇数
+    // arr.every(x => Number.isInteger(Math.sqrt(x))); //false 6不是平方数
+
+    /* 数组的基本操作: map和filter */
+    // const cart = [{name:"Widget",price:9.95},{name:"Gadget",price:22.95}];
+    // const names = cart.map(x => x.name);    //["Widget","Gadget"]
+    // const prices = cart.map(x => x.price);  //[9.95,22.95]
+    // const discountPrices = prices.map(x => x * 0.8); //[7.96,18.36]
+    // const lcNames = names.map(x => x.toLocaleLowerCase());  ["widget","gadget"]
+
+    // 合并成一个数组
+    // const items = ["Widget","Gadget"];
+    // const prices = [9.95,22.95];
+    // const cart = items.map((x,i) => ({name:x,price:prices[i]}));
+    // cart:[{name:"Widget",price:9.95},{name:"Gadget",price:22.95}]
+
+    // filter,删除数组中不需要的元素.像map一样,他返回一个删除了某些元素的数组
+    // 创建一副牌
+    // const cards = [];
+    // for (let suit of ['H', 'C', 'D', 'S'])  //heaets,clubs,diamonds,spades
+    //     for (let value = 1; value <= 13; value++)
+    //         cards.push({ suit, value });
+    // //找到所有含有2的卡片
+    // cards.filter(c => c.value === 2);
+    // [{ suit: 'H', value: 2 }, { suit: 'C', value: 2 }, { suit: 'D', value: 2 }, { suit: "S", value: 2 }]
+    // // (简单起见,下面的代码中只列出数组长度)
+    // // 找出所有方块
+    // cards.filter(c => c.suit === 'D');  //length: 13;
+    // // 找到所有花色牌
+    // cards.filter(c => c.value > 10);    //length: 12;
+    // //找到所有未红桃的花色牌
+    // cards.filter(c => c.value > 10 && c.suit === 'H');  //length: 3
+
+    // function cardToString(c) {
+    //     const suits = { 'H': '\u2665', 'C': '\u2663', 'D': '\u2666', 'S': '\u2660' };
+    //     const values = { 1: 'A', 11: 'J', 12: 'Q', 13: 'K' };
+    //     //每一次调用cardToString的时候去构建值,不是一个高效的方法
+    //     //如何找出一个高效的方法就作为读者练习吧
+    //     for (let i = 2; i <= 10; i++) values[i] = i;
+    //     return values[c.value] + suits[c.suit];
+    // }
+    // //找到所有包含2的牌
+    // cards.filter(c => c.value === 2).map(cardToString);
+    // //找到所有红桃的花色牌
+    // cards.filter(c => c.value > 10 && c.suit === 'H').map(cardToString);
+
+    /* 8.5 数组魔法 reduce */
+    // 求总和
+    // const arr = [5,7,2,4];
+    // const sum = arr.reduce((a,x) => a += x,0);
+    // console.log(sum);
+
+    // const arr = [5,7,2,4];
+    // const sum = arr.reduce((a,x) => a += x);
+
+    // const arr = Array(10).map(function(x) {return 5});
+    // console.log(arr);
+
+    /* 8.7 字符串连接 */
+    // join 好像数组转字符串
+    // const arr = [1,null,'hello','world',true,undefined];
+    // delete arr[3];
+    // arr.join();         //"1,,hello,,true"
+    // arr.join('');       //"1hellotrue"
+    // arr.join(' -- ');   //"1 -- -- hello -- -- true --"
+
+    /* 9.1.1 for...in */
+    //Symbol?
+    // const SYM = Symbol();
+    // const o = {a:1,b:2,c:3,[SYM]:4};
+    // for(let prop in o) {
+    //     if(!o.hasOwnProperty(prop)) continue;
+    //     console.log(prop+':'+o[prop]);
+    // }
+    //虽然for...in也可以用来迭代数组,但这通常被认为是一个不好的实践,建议大家使用一般的for循环或forEach迭代数组
+
+    /* 9.1.2 Object.keys */
+    // const SYM = Symbol();
+    // const o = {a:1,b:2,c:3,[SYM]:4};
+    // Object.keys(0).forEach(prop => console.log(prop+':'+o[prop]));
+
+    // 列出某个对象中所有以字符x开头的属性
+    // const o = {apple:1,xochitl:2,balloon:3,guitar:4,xylophone:5};
+    // Object.keys(0)
+    // .filter(prop => prop.match(/^x/))
+    // .forEach(prop => prop => console.log(prop+':'+o[prop]));
+
+    /* 9.2.1 创建类和实例 */
+    //创建了一个名为Car的类型
+    // class Car {
+    //     constructor(make, model) {
+    //         this.make = make;
+    //         this.model = model;
+    //         this.userGears = ['P', 'N', 'R', 'D'];
+    //         this.userGear = this.userGears[0];
+    //     }
+    //     shift(gear) {
+    //         if(this.userGears.indexOf(gear) < 0)
+    //             throw new Error("Invalid gear:"+gear);
+    //         this.userGear = gear;
+    //     }
+    // }
+    // const car1 = new Car("Tesla","Model S");
+    // const car2 = new Car("Mazda","3i");
+    // car1.shift("D");
+    // car2.shift("R");
+
+    // //instanceof运算符,这个运算符可以告诉大家一个给定的对象是否属于某个类
+    // car1 instanceof Car //true
+    // car1 instanceof Array //false
+
+    /* 9.2.2 动态属性 */
+    // class Car {
+    //     constructor(make,model){
+    //         this.make = make;
+    //         this.model = model;
+    //         this._userGears = ['P','N','R','D'];
+    //         this._userGear = this._userGears[0];
+    //     }
+    //     get userGear() { return this._userGear; }
+    //     set userGear(value) {
+            // if(this._userGears.indexOf(value) < 0)
+            //     throw new Error("Invalid gear:"+gear);
+            // this._userGears = value;
+    //     }
+    //     shift(gear) { this.userGear = gear; }
+    // }
+
+    // const Car = (function() {
+    //     const carProps = new WeakMap();
+    //     class Car {
+    //         constructor(make,model){
+    //             this.make = make;
+    //             this.model = model;
+    //             this._userGears = ['P','N','R','D'];
+    //             carProps.set(this,{ userGear: this._userGears[0] });
+    //         }
+    //         get userGear() { return carProps.get(this).userGear; }
+    //         set userGear(value) {
+    //             if(this._userGears.indexOf(value) < 0)
+    //                 throw new Error("Invalid gear:"+gear);
+    //             carProps.get(this).userGear = value;
+    //         }
+    //         shift(gear) { this.userGear = gear; }
+    //     }
+    //     return Car;
+    // })();
+
+    /* 9.2.3 类即函数 */
+    function Car(make,model) {
+        this.make = make;
+        this.model = model;
+        this._userGears = ['P','N','R','D'];
+        this._userGear = this._userGears[0];
+    }
+
+
+
 
 });
