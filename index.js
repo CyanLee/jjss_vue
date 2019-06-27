@@ -714,14 +714,408 @@ $(document).ready(function () {
     // })();
 
     /* 9.2.3 类即函数 */
-    function Car(make,model) {
-        this.make = make;
-        this.model = model;
-        this._userGears = ['P','N','R','D'];
-        this._userGear = this._userGears[0];
+    // function Car(make,model) {
+    //     this.make = make;
+    //     this.model = model;
+    //     this._userGears = ['P','N','R','D'];
+    //     this._userGear = this._userGears[0];
+    // }
+
+    /* 9.2.5 静态方法 */
+    // static
+    // 感觉有点像OC的类方法似的
+    // class Car {
+    //     static getNextVin(){
+    //         // return Car.nextVin++;
+    //         // 等效
+    //         return this.nextVin++;
+    //     }
+    //     constructor(make,model){
+    //         this.make = make;
+    //         this.model = model;
+    //         this.vin = Car.getNextVin();
+    //     }
+    //     static areSimilar(car1,car2){
+    //         return car1.make === car2.make && car1.model === car2.model;
+    //     }
+    //     static areSame(car1,car2){
+    //         return car1.vin === car2.vin;
+    //     }
+    // }
+    // Car.nextVin = 0;
+
+    // const car1 = new Car("Tesla","S");
+    // const car2 = new Car("Mazda","3");
+    // const car3 = new Car("Mazda","3");
+    // car1.vin;   //0
+    // car2.vin;   //1
+    // car3.vin;   //2
+    // Car.areSimilar(car1,car2);  //false
+    // Car.areSimilar(car2,car3);  //true
+    // Car.areSame(car2,car3);     //false
+    // Car.areSame(car2,car2);     //true
+
+    /* 9.2.6 继承 */
+    // extends
+    // class Vehicle {
+    //     constructor() {
+    //         this.passengers = [];
+    //         console.log("Vehicle created");
+    //     }
+    //     addPassenger(p){
+    //         this.passengers.push(p);
+    //     }
+    // }
+
+    // class Car extends Vehicle {
+    //     constructor() {
+    //         super();
+    //         console.log("Car created");
+    //     }
+    //     deployAirbags() {
+    //         console.log("BWOOSH!");
+    //     }
+    // }
+
+    // // 例子
+    // const v = new Vehicle();
+    // v.addPassenger("Frank");
+    // v.addPassenger("Judy");
+    // v.passengers;   //["Frank","Judy"]
+    // c.addPassenger("Alice");
+    // c.addPassenger("Cameron");
+    // c.passengers;   //["Alice","Cameron"]
+    // v.deployAirbags();  //报错  (父类调子类方法)
+    // c.deployAirbags();  //"BWOOSH!"
+
+    /* 多态 */
+    // instanceof运算符,判断某对象是否属于某个类
+    // instanceof父类也被算为同级
+    // class Motorcycle extends Vehicle {}
+    // const c = new Car();
+    // const m = new Motorcycle();
+    // c instanceof Car;       //true
+    // c instanceof Vehicle;   //true
+    // m instanceof Car;       //false
+    // m instanceof Motorcycle;//ture
+    // m instanceof Vehicle;   //true
+
+    /* 9.2.8 枚举对象属性 */
+    // obj.hasOwnProperty(x)返回true,说明该对象有这个属性
+    // class Super {
+    //     constructor() {
+    //         this.name = 'Super'
+    //         this.isSuper = true;
+    //     }
+    // }
+    //合法,但不推荐这么做   Super.prototype.sneaky
+    // Super.prototype.sneaky = 'not recommended!';
+    // class Sub extends Super {
+    //     constructor() {
+    //         super();
+    //         this.name = 'Sub';
+    //         this.isSub = true;
+    //     }
+    // }
+    // const obj = new Sub();
+
+    // for(let p in obj) {
+        
+    // }
+
+    /* 9.2.9 字符串表示 */
+    // toString 这个就好java的一摸一样了
+    // class Car {
+    //     toString() {
+    //         return this.make + this.model + this.vin;
+    //     }
+    // }
+
+    /* 9.3 多继承,混合类和接口 */
+    // 懵逼
+
+    /* 10.1 maps */
+    //例如:当想把user对象映射到role的时候:
+    // const u1 = {name:'Cynthia'};
+    // const u2 = {name:'Jackson'};
+    // const u3 = {name:'Olive'};
+    // const u4 = {name:'James'};
+    // //创建一个map对象
+    // const userRoles = new Map();
+    // //可以使用map中的set()方法把user赋给role:
+    // userRoles.set(u1,'User');
+    // userRoles.set(u2,'User');
+    // userRoles.set(u3,'Admin');
+    // //链式调用set()方法
+    // userRoles
+    //     .set(u1,'User')
+    //     .set(u2,'User')
+    //     .set(u3,'Admin');
+    // //还可以给map的构造函数传一个包含了数组的数组
+    // const userRoles = new Map ([
+    //     [u1,'User'],
+    //     [u2,'User'],
+    //     [u3,'Admin'],
+    // ]);
+    // //现在如果想知道u2中有什么role,使用get()方法就行
+    // userRoles.get(u2);  //"User"
+    // //has()查看map是否包含给定的key
+    // userRoles.has(u1);  //true
+    // userRoles.get(ul);  //"User"
+    // userRoles.has(u4);  //false
+    // userRoles.get(u4);  //undefined
+    // //如果key已经在map中了,那么调用set()后key对应的value就会被替换
+    // userRoles.get(u1);
+    // userRoles.set(u1,'Admin');
+    // userRoles.get(u1);
+    // //size属性返回map中的元素个数
+    // userRoles.size; //3
+    // //使用keys()可以拿到map中的所有健
+    // //使用values()可以拿到所有的值
+    // //entries()则可以以数组的方式获取键值对,数组的第一个元素为键,第二个元素为值
+    // for(let u of userRoles.keys())
+    //     console.log(u.name);
+    // for(let r of userRoles.values()) 
+    //     console.log(r);
+    // for(let u of userRoles.entries())
+    //     console.log(u[0].name+':'+u[1]);
+    // //这里可以通过解构让迭代更自然
+    // for(let [u,r] of userRoles.entries())
+    //     console.log(u.name+':'+r);
+    // //entries()方法是Map是默认迭代器,说哟上例可以简写
+    // for(let [u,r] of userRoles) 
+    //     console.log(u.name+':'+r);
+    // //如果需要一个数组(而不是一个可迭代的对象)
+    // [...userRoles.values()];    //["User","User","Admin"]
+    // //使用delete()方法可以删除map中的一个条目
+    // userRoles.delete(u2);
+    // userRoles.size; //2
+    // //如果想删除map的所有条目
+    // userRoles.clear();
+    // userRoles.size; //0
+
+    /* 10.2 Weak maps */
+    //懵逼
+    //1.key必须是对象
+    //2.WeakMap中的key可以被垃圾回收
+    //3.WeakMap不能迭代或者清空
+    // const SecretHolder = (function() {
+    //     const secrets = new WeakMap();
+    //     return class {
+    //         setSecret(secret) {
+    //             secrets.set(this,secret);
+    //         }
+    //         getSecret() {
+    //             return secrets.get(this);
+    //         }
+    //     }
+    // })();
+    // const a = new SecretHolder();
+    // const b = new SecretHolder();
+    // a.setSecret('secret A');
+    // b.setSecret('secret B');
+    // a.getSecret();  //'secret A'
+    // b.getSecret();  //'secret B'
+
+    /* 10.3 sets */
+    //set是不允许重复数据的集合
+    // const roles = new Set();
+    // roles.add("User");  //Set["User"];
+    // roles.add("Admin"); //Set["User',"Admin"];
+    // //跟Map一样,Set也有size属性
+    // roles.size; // 2
+    // //set优美之处:不需要再添加元素的时候检查set中是否已经有这个元素
+    // roles.add("User");  //Set["User","Admin"]
+    // roles.size;         //2
+
+    // //删除role的时候,调用delete()方法,当他返回true的时候表示这个role在set中,否则返回false
+    // roles.delete("Admin");  //true
+    // roles;                  //Set["User"]
+    // roles.delete("Admin");  //false
+
+    /* 10.2 Weak sets */
+    //懵逼
+
+    /* 映射就是键值对? */
+
+    /* 11.1 Error对象 */
+    // function validateEmail(email) {
+    //     return email.match(/@/) ? email : new Error('invalid email:'+email);
+    // }
+
+    // const email = "jane@doe.com";
+    // const validateEmail = validateEmail(email);
+    // if(validateEmail instanceof Error) {
+    //     console.error('Error:'+validateEmail.message);
+    // }else{
+    //     console.log('Valid email'+validateEmail);
+    // }
+
+    /* 11.2 使用try和catch处理异常 */
+    // const email = null;
+    // try{
+    //     const validateEmail = validateEmail(email);
+    //     if(validateEmail instanceof Error) {
+    //         console.error('Error:'+validateEmail.message);
+    //     }else{
+    //         console.log('Valid email'+validateEmail);
+    //     }
+    // } catch(err) {
+    //     console.error('Error:'+validateEmail.message);
+    // }
+
+    /* 11.3 抛出异常 */
+    // function billPay(amount,payee,account) {
+    //     if(amount > account.balance)
+    //         throw new Error('insufficient funds');  //谁调用,就抛给谁
+    //     account.transfer(payee,amount);
+    // }
+
+    /* 11.4 异常处理和调用栈 */
+    // function a() {
+    //     console.log('a: calling b');
+    //     b();
+    //     console.log('a: done');
+    // }
+
+    // function b() {
+    //     console.log('b: calling c');
+    //     c();
+    //     console.log('b: done');
+    // }
+
+    // function c() {
+    //     console.log('c: throwing error');
+    //     throw new Error('c error');
+    //     console.log('c: done');
+    // }
+
+    // function d() {
+    //     console.log('d: calling c');
+    //     c();
+    //     console.log('d: done');
+    // }
+
+    // try{
+    //     a();
+    // }catch(err){
+    //     console.log(err.stack);
+    // }
+
+    // try{
+    //     d();
+    // }catch(err){
+    //     console.log(err.stack);
+    // }
+
+    /* 11.5 try...catch...finally */
+    //finally是不管正确与否都会执行的
+
+    /* 迭代器和生成器 */
+    // const book = [
+    //     "Twinkle,twinkle,little bat!",
+    //     "How I wonder what you'er at!",
+    //     "Up above the world you fly",
+    //     "Like a tea tray in the sky",
+    //     "Twinkle,twinkle,little bat!",
+    //     "How I wonder what you'er at!",
+    // ]
+    //通过数组的values方法获取迭代器
+    // const it = book.values();
+    // it.next();  //{value:"Twinkle,twinkle,little bat!",done:false};
+    // it.next();  //{value:"How I wonder what you'er at!",done:false};
+    // it.next();  //{value:"Up above the world you fly",done:false};
+    // it.next();  //{value:"Like a tea tray in the sky",done:false};
+    // it.next();  //{value:"Twinkle,twinkle,little bat!",done:false};
+    // it.next();  //{value:"How I wonder what you'er at!",done:false};
+    // it.next();  //{value:undefined,done:true}
+    // it.next();  //{value:undefined,done:true}
+    // it.next();  //{value:undefined,done:true}
+
+    /* 迭代协议 */
+    // class Log {
+    //     constructor() {
+    //         this.messages = [];
+    //     }
+    //     add(message) {
+    //         this.messages.push({message,timestamp:Date.now()});
+    //     }
+    //     [Symbol.iterator]() {
+    //         return this.messages.values();
+    //     }
+    // }
+
+    // //下面可以像数组那样迭代Log类的实例了
+    // const log = new Log();
+    // log.add("first day at sea");
+    // log.add("spotted whale");
+    // log.add("spotted another vessel");
+    // //像数组一样迭代log
+    // for(let entry of log) {
+    //     console.log(entry.message+'@'+entry.timestamp);
+    // }
+
+    // //编写自己的迭代器
+    // class Log {
+    //     constructor() {
+    //         this.messages = [];
+    //     }
+    //     add(message) {
+    //         this.messages.push({message,timestamp:Date.now()});
+    //     }
+    //     [Symbol.iterator]() {
+    //         let i = 0;
+    //         const messages = this.messages;
+    //         return {
+    //             next() {
+    //                 if (i >= messages.length)
+    //                     return {value:undefined,done:true};
+    //                 return {value:messages[i++],done:false};
+    //             }
+    //         }
+    //     }
+    // }
+
+    /* 生成器 */
+    // function* rainbow() {   //通配符让他变成一个生成器
+    //     yield 'red';
+    //     yield 'orange';
+    //     yield 'yellow';
+    //     yield 'green';
+    //     yield 'blue';
+    //     yield 'indigo';
+    //     yield 'violet';
+    // }
+    // const it = rainbow();   //记住,当调用生成器的时候,实际上是回到了迭代器中
+    // it.next();  //{value:"red",done:false}
+    // it.next();  //{value:"orange",done:false}
+    // it.next();  //{value:"yellow",done:false}
+    // it.next();  //{value:"green",done:false}
+    // it.next();  //{value:"blue",done:false}
+    // it.next();  //{value:"indigo",done:false}
+    // it.next();  //{value:"violet",done:false}
+    // it.next();  //{value:undefined,done:true}
+    // //因为rainbow生成器返回了一个迭代器,所以对其使用for...of循环
+    // for(let color of rainbow()) {
+    //     console.log(color);
+    // }
+
+    /* 12.2.2 生成器和返回值 */
+    //在生成器的任何位置调用return都会使done的值变为true,而value的值则是任何被返回的值
+    function* abc() {
+        yield 'a';
+        yield 'b';
+        return 'c';
     }
-
-
-
+    const it = abc();
+    it.next();  {value:'a',done:false};
+    it.next();  {value:'b',done:false};
+    it.next();  {value:'c',done:true};
+    
+    //但是在for...of选择却不会打印"c"
+    //将会打印"a"和"b",但是没有"c"
+    for(let l of abc()){
+        console.log(l);
+    }
 
 });
