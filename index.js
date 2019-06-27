@@ -1102,20 +1102,20 @@ $(document).ready(function () {
 
     /* 12.2.2 生成器和返回值 */
     //在生成器的任何位置调用return都会使done的值变为true,而value的值则是任何被返回的值
-    function* abc() {
-        yield 'a';
-        yield 'b';
-        return 'c';
-    }
-    const it = abc();
-    it.next();  {value:'a',done:false};
-    it.next();  {value:'b',done:false};
-    it.next();  {value:'c',done:true};
+    // function* abc() {
+    //     yield 'a';
+    //     yield 'b';
+    //     return 'c';
+    // }
+    // const it = abc();
+    // it.next();  {value:'a',done:false};
+    // it.next();  {value:'b',done:false};
+    // it.next();  {value:'c',done:true};
     
-    //但是在for...of选择却不会打印"c"
-    //将会打印"a"和"b",但是没有"c"
-    for(let l of abc()){
-        console.log(l);
-    }
+    // //但是在for...of选择却不会打印"c"
+    // //将会打印"a"和"b",但是没有"c"
+    // for(let l of abc()){
+    //     console.log(l);
+    // }
 
 });
