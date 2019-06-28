@@ -1118,4 +1118,39 @@ $(document).ready(function () {
     //     console.log(l);
     // }
 
+    /* 纯函数 */
+    //1.针对相同的输入,函数的返回值始终一样,并且没有副作用
+    //解析:就是传入同一个参数,返回的结果也是一样的,而且不会是其他值发生改变
+
+    /* 13.5 IIEFs和异步代码 */
+    // setTimeout(function() {
+    //     console.log("hello")
+    // },1500);
+    // var i;
+    // for(i=5; i>=0; i--){
+    //     (function(i) {
+    //         setTimeout(function(){
+    //             console.log(i === 0 ? "go!" : i);
+    //         },(5-1)*1000);
+    //     })(i);
+    // }
+
+    // for(let i=5; i>0; i--){
+    //     setTimeout(function() {
+    //         console.log(i === 0 ? "go!" : i);
+    //     },(5-i)*1000);
+    // }
+
+    /* 13.6.1 数组中的函数 */
+    const sin = Math.sin;
+    const cos = Math.cos;
+    const theta = Math.PI/4;
+    const zoom = 2;
+    const offset = [1,-3];
+    const pipeline = [
+        function {
+            
+        }
+    ]
+
 });
