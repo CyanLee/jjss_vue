@@ -686,9 +686,9 @@ $(document).ready(function () {
     //     }
     //     get userGear() { return this._userGear; }
     //     set userGear(value) {
-            // if(this._userGears.indexOf(value) < 0)
-            //     throw new Error("Invalid gear:"+gear);
-            // this._userGears = value;
+    // if(this._userGears.indexOf(value) < 0)
+    //     throw new Error("Invalid gear:"+gear);
+    // this._userGears = value;
     //     }
     //     shift(gear) { this.userGear = gear; }
     // }
@@ -820,7 +820,7 @@ $(document).ready(function () {
     // const obj = new Sub();
 
     // for(let p in obj) {
-        
+
     // }
 
     /* 9.2.9 字符串表示 */
@@ -1111,7 +1111,7 @@ $(document).ready(function () {
     // it.next();  {value:'a',done:false};
     // it.next();  {value:'b',done:false};
     // it.next();  {value:'c',done:true};
-    
+
     // //但是在for...of选择却不会打印"c"
     // //将会打印"a"和"b",但是没有"c"
     // for(let l of abc()){
@@ -1142,15 +1142,144 @@ $(document).ready(function () {
     // }
 
     /* 13.6.1 数组中的函数 */
-    const sin = Math.sin;
-    const cos = Math.cos;
-    const theta = Math.PI/4;
-    const zoom = 2;
-    const offset = [1,-3];
-    const pipeline = [
-        function {
-            
-        }
-    ]
+    // const sin = Math.sin;
+    // const cos = Math.cos;
+    // const theta = Math.PI/4;
+    // const zoom = 2;
+    // const offset = [1,-3];
+    // const pipeline = [
+    //     function rotate(p){
+    //         return {
+    //             x:p.x * cos(theta) - p.y * sin(theta),
+    //             y:p.x * sin(theta) + p.y * cos(theta),
+    //         };
+    //     },
+    //     function scale(p) {
+    //         return {
+    //             x: p.x * zoom,
+    //             y: p.y * zoom
+    //         };
+    //     },
+    //     function translate(p) {
+    //         return {
+    //             x: p.x + offset[0],
+    //             y: p.y + offset[1]
+    //         };
+    //     },
+    // ];
+    // const p = {x: 1, y: 1};
+    // let p2 = p;
+    // for(let i=0; i<pipeline.length; i++){
+    //     p2 = pipeline[i](p2);
+    // }
+
+    /* 13.6.2 将函数传给函数 */
+    // function sum(arr, f) {
+    //     //如果没有提供任何函数,使用一个将参数原样返回的"空函数"
+    //     if (typeof f != 'function')
+    //         f = x => x;
+    //     return arr.reduce((a, x) => a += f(x), 0);
+    // }
+    // // const f3 = function(a,b) {return "hello";}
+    // // const f3 = (a,b) => a+b;
+    // sum([1,2,3]);                   //返回6
+    // sum([1,2,3],x=> x*x);           //返回14
+    // sum([1,2,3],x=>Math.pow(x,3));  //返回36
+
+    /* 13.6.3 在函数中返回函数 */
+    // function sumOfSquares(arr) {
+    //     return sum(arr, x => x*x);
+    // }
+    // function newSummer(f) {
+    //     return arr => sum(arr, f);
+    // }
+    // const sumOfSquares = newSummer(x => x*x);
+    // const sumOfCubes = newSummer(x => Math.pow(x,3));
+    // sumOfSquares([1,2,3]);      //返回14
+    // sumOfCubes([1,2,3]);        //返回36
+
+    /* 14.2 回调 */
+    // console.log("Before timeou:" + new Date());
+    // function f() {
+    //     console.log("After timeout:" + new Date());
+    // }
+    // setTimeout(f, 60*1000); //1分钟
+    // console.log("I happen after setTimeout");
+    // console.log("Me too!");
+
+    // setTimeout(() => {
+    //     console.log("After timeout"+new Date());
+    // }, 60*1000);
+
+    /* 14.2.1 setInterval和clearInterval */
+    // 定时器
+    // const start = new Date();
+    // let i = 0;
+    // const intervalID = setInterval(() => {
+    //     let now = new Date();
+    //     if (now.getMinutes() !== start.getMinutes() || ++i > 10)
+    //         return clearInterval(intervalID);
+    //     console.log(i+'+'+now);
+    // }, 5 * 1000);
+
+    /* 14.2.2 scope和异步执行 */
+    // function countdown() {
+    //     let i;
+    //     console.log("Countdown:");
+    //     for(i=5;i>=0;i--){
+    //         console.log(i);
+    //         setTimeout(function() {
+    //             console.log(i===0 ? "Go!" : i);
+    //         },(5-i)*1000);
+    //     }
+    // }
+    // countdown();
+    // function countdown() {
+    //     for(let i=5;i>=0;i--){
+    //         console.log(i);
+    //         setTimeout(function() {
+    //             console.log(i===0 ? "Go!" : i);
+    //         },(5-i)*1000);
+    //     }
+    // }
+    // countdown();
+
+    /* /* 14.2.4 回调地狱 */
+    // 读取三个不同文件中的内容,然后等待60秒,再把这些内容合并并写进第4个文件
+    // const fs = require('fs');
+    // fs.readFile('a.txt',function(err,dataA) {
+    //     if(err) console.error(err);
+    //     fs.readFile()
+    // });
+
+    /* 14.3.1 创建promise */
+    function countdown(seconds){
+        return new Promise(function(resolve,reject) {
+            for(let i = seconds; i>=0; i--){
+                setTimeout(() => {
+                    // console.log(i===0 ? "Go!" : i);
+                    // if(i===13) return reject(new Error("DEFINITELY NOT COUNTING THAT"));
+                    if(i>0) resolve(console.log("Go!"));
+                    else console.log(i+"...");
+                }, (seconds-1)*1000);
+            }
+        });
+    }
+    /* 14.3.2 使用promise */
+    // countdown(5).then(
+    //     function() {
+    //         console.log("countdown completed successfully");
+    //     },
+    //     function(err){
+    //         console.log("countdown exerienced an error:"+err.message);
+    //     }
+    // );
+    const p = countdown(14);
+    p.then(function() {
+        console.log("countdown completed successfully");
+    });
+    p.catch(function(err){
+        console.log("countdown exerienced an error:"+err.message);
+    });
 
 });
