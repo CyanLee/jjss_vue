@@ -1253,18 +1253,18 @@ $(document).ready(function () {
     // });
 
     /* 14.3.1 创建promise */
-    function countdown(seconds){
-        return new Promise(function(resolve,reject) {
-            for(let i = seconds; i>=0; i--){
-                setTimeout(() => {
-                    // console.log(i===0 ? "Go!" : i);
-                    // if(i===13) return reject(new Error("DEFINITELY NOT COUNTING THAT"));
-                    if(i>0) resolve(console.log("Go!"));
-                    else console.log(i+"...");
-                }, (seconds-1)*1000);
-            }
-        });
-    }
+    // function countdown(seconds){
+    //     return new Promise(function(resolve,reject) {
+    //         for(let i = seconds; i>=0; i--){
+    //             setTimeout(() => {
+    //                 // console.log(i===0 ? "Go!" : i);
+    //                 // if(i===13) return reject(new Error("DEFINITELY NOT COUNTING THAT"));
+    //                 if(i>0) resolve(console.log("Go!"));
+    //                 else console.log(i+"...");
+    //             }, (seconds-1)*1000);
+    //         }
+    //     });
+    // }
     /* 14.3.2 使用promise */
     // countdown(5).then(
     //     function() {
@@ -1274,12 +1274,46 @@ $(document).ready(function () {
     //         console.log("countdown exerienced an error:"+err.message);
     //     }
     // );
-    const p = countdown(14);
-    p.then(function() {
-        console.log("countdown completed successfully");
+    // const p = countdown(14);
+    // p.then(function() {
+    //     console.log("countdown completed successfully");
+    // });
+    // p.catch(function(err){
+    //     console.log("countdown exerienced an error:"+err.message);
+    // });
+    // then和resolve的关系是相关的,虽然2个都是成功的回调,但是有个区别的是resolve是被动调用的,resolve可以传值给then,而then是主动调用的
+
+    /* 14.3.3 事件 */
+    const EventEmitter = require('events').EventEmitter;
+    class Countdown extends EventEmitter {
+        constructor(seconds, superstitious) {
+            super();
+            this.seconds = seconds;
+            this.superstitious = !!superstitious;
+        }
+        go() {
+            const countdown = this;
+            return new Promise(function (resolve, reject) {
+                for (let i = countdown.seconds; i >= 0; i++) {
+                    setTimeout(() => {
+                        if (countdown.superstitious && i === 13)
+                            return reject(new Error("DEFINITELY NOT COUNTING THAT"));
+                        countdown.emit('tick', i);
+                        if (i === 0) resolve();
+                    }, (countdown.seconds - i) * 1000);
+                }
+            });
+        }
+    }
+    const c = new Countdown(5);
+    c.on('tick',function(i) {
+        if(i>0) console.log(i + '...');
     });
-    p.catch(function(err){
-        console.log("countdown exerienced an error:"+err.message);
-    });
+    c.go().then(function(){
+        console.log('GO!');
+    })
+    .catch(function(err){
+        console.error(err.message);
+    })
 
 });
