@@ -1,8 +1,8 @@
 <template>
   <div id="home-main">
-    <navi naviTitle="投标详情"></navi>
-    <div class="content-view">
-      <router-link v-for="(item,index) in dataList" :key="index" :to="''">
+    <navi naviTitle="首页"></navi>
+    <div class="content-view" v-for="(item,index) in dataList" :key="index">
+      <router-link :to="''" @click.native="homeCellClick">
         <home-cell></home-cell>
       </router-link>
     </div>
@@ -16,6 +16,15 @@ export default {
     return {
       dataList: [1, 2, 3, 4, 5, 6, 7, 8]
     };
+  },
+  methods: {
+    homeCellClick() {
+      this.$messageBox
+        .alert("为了您的资金 账户安全，请设置支付密码")
+        .then(action => {
+          this.$router.push("homeDetails");
+        });
+    }
   }
 };
 </script>
@@ -28,9 +37,9 @@ a {
 #home-main {
   padding: 1.28rem 0 1.28rem 0;
   position: relative;
-  .content-view{
-      position: relative;
-      z-index: 99;
+  .content-view {
+    position: relative;
+    z-index: 99;
   }
 }
 </style>

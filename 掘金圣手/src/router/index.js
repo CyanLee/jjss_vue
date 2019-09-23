@@ -8,7 +8,9 @@ export default () => {
     const Registered = () => import('../views/login/Registered.vue');
     const SubmitSucc = () => import('../views/login/SubmitSucc.vue');
     const Home = () => import('../views/home/Home.vue');
+    const HomeDetails = () => import('../views/home/Home.details.vue');
     const Mine = () => import('../views/mine/Mine.vue');
+    const HomePay = () => import('../views/home/Home.pay.vue');
     const router = new VueRouter();
     router.addRoutes([
         {
@@ -36,6 +38,16 @@ export default () => {
             name: 'mine',
             path: '/mine',
             component: Mine,
+        },
+        {
+            name: 'homeDetails',
+            path: '/homeDetails',
+            component: HomeDetails,
+        },
+        {
+            name: 'homePay',
+            path: '/homePay',
+            component: HomePay,
         },
     ]);
     Vue.use(VueRouter);

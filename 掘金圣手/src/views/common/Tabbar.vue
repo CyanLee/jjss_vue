@@ -27,7 +27,7 @@ export default {
 <style lang="less" scoped>
 #tabbar-view {
   border-top: 0.01rem solid #f8f8f8;
-  z-index: 9999;
+  z-index: 999;
   width: 100%;
   height: 0.98rem;
   background: #ffffff;

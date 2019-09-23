@@ -11,6 +11,10 @@ const router = RouterComponent();
 import CommonComponent from './router/commonRouter';
 CommonComponent();
 
+// 导入mint-ui的组件配置
+import MintUIComponent from './router/mintUIComponent'; 
+MintUIComponent();
+
 // 导入公共的样式
 import './less/common.less';
 
