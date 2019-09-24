@@ -15,11 +15,14 @@
         <p>验证码</p>
         <div>
           <input type="text" placeholder="请输入验证码" />
-          <a href></a>
+          <a href>重新获取</a>
         </div>
       </div>
     </div>
     <!-- 按钮 -->
+    <div class="bottom-view">
+      <router-link :to="'homePayPassword'">下一步</router-link>
+    </div>
   </div>
 </template>
 
@@ -75,14 +78,41 @@ export default {};
         display: flex;
         justify-content: flex-start;
         height: 0.91rem;
+        border-bottom: 0.01rem solid rgba(59, 48, 96, 0.3);
+        margin-left: 0.61rem;
+        margin-right: 0.61rem;
         input {
           width: 100%;
           font-size: 0.34rem;
-          margin-left: 0.61rem;
-          margin-right: 0.61rem;
-          border-bottom: 0.01rem solid rgba(59, 48, 96, 0.3);
+        }
+        a {
+          display: inline-block;
+          font-size: 0.3rem;
+          background: #19cd60;
+          width: 2.7rem;
+          height: 0.58rem;
+          line-height: 0.58rem;
+          color: white;
+          border-radius: 0.5rem;
         }
       }
+    }
+  }
+  .bottom-view {
+    margin-top: 2.22rem;
+    width: 100%;
+    height: 1.64rem;
+    background: white;
+    a {
+      display: inline-block;
+      width: 6.3rem;
+      height: 1rem;
+      background: #19cd60;
+      line-height: 1rem;
+      font-size: 0.4rem;
+      font-weight: bold;
+      color: white;
+      border-radius: 0.1rem;
     }
   }
 }
