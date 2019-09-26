@@ -12,6 +12,7 @@ export default () => {
     const Mine = () => import('../views/mine/Mine.vue');
     const HomePay = () => import('../views/home/Home.pay.vue');
     const HomePayPassword = () => import('../views/home/Home.pay.password.vue');
+    const HomeSetPayPassword = () => import('../views/home/Home.pay.setpassword.vue');
     const router = new VueRouter();
     router.addRoutes([
         {
@@ -55,6 +56,11 @@ export default () => {
             path: '/homePayPassword',
             component: HomePayPassword,
         },
+        {
+            name: 'homeSetPayPassword',
+            path: '/homeSetPayPassword',
+            component: HomeSetPayPassword,
+        }
     ]);
     Vue.use(VueRouter);
     return router;

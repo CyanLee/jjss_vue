@@ -1,6 +1,6 @@
 <template>
   <div id="navi-main">
-    <div class="left-view" @click="back"></div>
+    <div :class="isHiddenLeft?'left-view':''" @click="back"></div>
     <span class="title">{{this.naviTitle}}</span>
     <div class="right-view">
       <a href></a>
@@ -10,24 +10,24 @@
 
 <script>
 export default {
-    data() {
-        return {
-            
-        }
-    },
-    props:['naviTitle'],
-    methods: {
-      back(){
-        this.$router.history.go(-1);
-      }
-    },
+  data() {
+    return {
+      isHiddenLeft: false
+    };
+  },
+  props: ["naviTitle"],
+  methods: {
+    back() {
+      this.$router.history.go(-1);
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
 #navi-main {
-    background: white;
-  border-bottom: 0.01rem solid #f8f8f8;
+  background: white;
+  // border-bottom: 0.01rem solid #f8f8f8;
   position: fixed;
   z-index: 999;
   top: 0;
@@ -39,7 +39,7 @@ export default {
   align-items: center;
   .left-view {
     background: url("../../img/back.png") no-repeat;
-    background-size:cover;
+    background-size: cover;
     width: 0.44rem;
     height: 0.44rem;
     margin-left: 0.2rem;

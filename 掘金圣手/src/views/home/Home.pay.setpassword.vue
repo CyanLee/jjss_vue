@@ -1,6 +1,6 @@
 <template>
   <div id="main-view">
-    <navi naviTitle="支付密码"></navi>
+    <navi naviTitle="设置密码"></navi>
     <!-- header -->
     <div>
       <p class="header-tip-p">为了您的资金安全，请按照以下步骤设置支付密码</p>
@@ -8,16 +8,17 @@
     <!-- 输入框 -->
     <div class="section-view-div">
       <div class="section-view-phone-view">
-        <p>手机号</p>
+        <p>支付密码</p>
         <input type="text" placeholder="请输入手机号" />
       </div>
       <div class="section-view-code-view">
-        <p>验证码</p>
+        <p>支付密码</p>
         <div>
           <input type="text" placeholder="请输入验证码" />
-          <a href>重新获取</a>
+          <!-- <a href>重新获取</a> -->
         </div>
       </div>
+      <p class="tip-p">注：支付密码为6位自然数</p>
     </div>
     <!-- 按钮 -->
     <div class="bottom-view">
@@ -97,6 +98,13 @@ export default {};
         }
       }
     }
+    .tip-p{
+      color: #FD7A4E;
+      font-size: 0.26rem;
+      text-align: left;
+      margin-left: 0.61rem;
+      margin-top: 0.2rem;
+  }
   }
   .bottom-view {
     margin-top: 2.22rem;
