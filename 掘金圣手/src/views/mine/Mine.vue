@@ -49,7 +49,7 @@
     <div class="need-tools-div">
       <p>必备工具</p>
       <div>
-        <div v-for="(item, index) in toolsList" :key="index">
+        <div v-for="(item, index) in toolsList" :key="index" @click="pushClick(item.push)">
           <div>
             <img :src="item.icon" alt />
           </div>
@@ -68,7 +68,7 @@ export default {
                 {
                     icon:require('../../img/mine-wallet.png'),
                     name:'我的钱包',
-                    push:''
+                    push:'mineWallet'
                 },
                 {
                     icon:require('../../img/mine-wallet.png'),
@@ -83,12 +83,12 @@ export default {
                 {
                     icon:require('../../img/mine-wallet.png'),
                     name:'支付密码',
-                    push:''
+                    push:'mineSetting'
                 },
                 {
                     icon:require('../../img/mine-wallet.png'),
                     name:'修改登录密码',
-                    push:''
+                    push:'mineSetting'
                 },
                 {
                     icon:require('../../img/mine-wallet.png'),
@@ -97,6 +97,11 @@ export default {
                 },
             ]
         }
+    },
+    methods: {
+      pushClick(pushUrl) {
+        this.$router.push(pushUrl);
+      }
     },
 };
 </script>

@@ -27,7 +27,7 @@ export default {
 <style lang="less" scoped>
 #navi-main {
   background: white;
-  // border-bottom: 0.01rem solid #f8f8f8;
+  border-bottom: 0.01rem solid #f8f8f8;
   position: fixed;
   z-index: 999;
   top: 0;
