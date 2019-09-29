@@ -19,13 +19,15 @@ export default () => {
     const MineSetting = () => import('../views/mine/Mine.setting.vue');
     const MineSettingSel = () => import('../views/mine/Mine.setting.sel.vue');
     const MineWallet = () => import('../views/mine/Mine.wallet.vue');
+    const MineAddBankCardNull = () => import('../views/mine/Mine.addBankCard.Null.vue');
+    const MineAddBankCard = () => import('../views/mine/Mine.addBankCard.vue');
 
     const router = new VueRouter();
     router.addRoutes([
         {
             path: '/',
             redirect: {
-                name: 'registered',
+                name: 'home',
             }
         },
         {
@@ -82,6 +84,16 @@ export default () => {
             name: 'mineWallet',
             path: '/mineWallet',
             component: MineWallet,
+        },
+        {
+            name: 'mineAddBankCardNull',
+            path: '/mineAddBankCardNull',
+            component: MineAddBankCardNull,
+        },
+        {
+            name: 'mineAddBankCard',
+            path: '/mineAddBankCard',
+            component: MineAddBankCard,
         }
     ]);
     Vue.use(VueRouter);
