@@ -18,7 +18,7 @@
     </div>
     <!-- 按钮 -->
     <div class="action-div">
-      <router-link to>充值</router-link>
+      <router-link to="mineTopup">充值</router-link>
       <router-link to="mineAddBankCardNull">提现</router-link>
     </div>
     <!-- 分割线 -->

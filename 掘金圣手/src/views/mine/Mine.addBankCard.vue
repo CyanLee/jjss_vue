@@ -38,12 +38,18 @@
     <!-- 手机号提示 -->
     <p class="phone-tip-p">手机号是您在办理银行卡所留的手机号</p>
     <!-- 立即添加按钮 -->
-    <a class="actionBtn" href="">立即添加</a>
+    <a class="actionBtn" @click="addBankCardClick">立即添加</a>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    addBankCardClick(){
+      this.$router.push('mineBankCardList');
+    }
+  },
+};
 </script>
 
 <style lang="less" scoped>

@@ -21,6 +21,8 @@ export default () => {
     const MineWallet = () => import('../views/mine/Mine.wallet.vue');
     const MineAddBankCardNull = () => import('../views/mine/Mine.addBankCard.Null.vue');
     const MineAddBankCard = () => import('../views/mine/Mine.addBankCard.vue');
+    const MineBankCardList = () => import('../views/mine/Mine.BankCardList.vue');
+    const MineTopup = () => import('../views/mine/Mine.topup.vue');
 
     const router = new VueRouter();
     router.addRoutes([
@@ -94,6 +96,16 @@ export default () => {
             name: 'mineAddBankCard',
             path: '/mineAddBankCard',
             component: MineAddBankCard,
+        },
+        {
+            name:'mineBankCardList',
+            path:'/mineBankCardList',
+            component:MineBankCardList,
+        },
+        {
+            name:'mineTopup',
+            path:'/mineTopup',
+            component:MineTopup,
         }
     ]);
     Vue.use(VueRouter);
