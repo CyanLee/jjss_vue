@@ -23,6 +23,8 @@ export default () => {
     const MineAddBankCard = () => import('../views/mine/Mine.addBankCard.vue');
     const MineBankCardList = () => import('../views/mine/Mine.BankCardList.vue');
     const MineTopup = () => import('../views/mine/Mine.topup.vue');
+    const MineBusinessCard = () => import('../views/mine/Mine.businessCard.vue');
+
 
     const router = new VueRouter();
     router.addRoutes([
@@ -106,6 +108,11 @@ export default () => {
             name:'mineTopup',
             path:'/mineTopup',
             component:MineTopup,
+        },
+        {
+            name:'mineBusinessCard',
+            path:'/mineBusinessCard',
+            component:MineBusinessCard,
         }
     ]);
     Vue.use(VueRouter);

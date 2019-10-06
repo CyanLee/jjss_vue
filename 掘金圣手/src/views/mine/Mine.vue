@@ -78,7 +78,7 @@ export default {
                 {
                     icon:require('../../img/mine-wallet.png'),
                     name:'回款记录',
-                    push:''
+                    push:'mineBusinessCard'
                 },
                 {
                     icon:require('../../img/mine-wallet.png'),
